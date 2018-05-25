@@ -24,7 +24,7 @@ import apiKey from './Config';
      this.performSearch();
      }
 
-  
+
      //Fetch data with Axios from Flickr API
      performSearch = (query=this.props.query) => {
      axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=20&format=json&nojsoncallback=1`)
