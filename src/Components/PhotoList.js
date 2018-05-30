@@ -11,7 +11,7 @@ const PhotoList = (props) => {
      const results = props.data;
      let photos;
 
-     if (results.length>0) {
+     if (results.length > 0) {
             photos = results.map(photo =>
                  <Photos
                    url={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`}
@@ -21,7 +21,6 @@ const PhotoList = (props) => {
          } else {
           photos = <NoPhotos />
         }
-
           return(
             <ul className="photo-list">
               {photos}

@@ -21,16 +21,6 @@ import apiKey from './Config';
        }
      }
 
-     componentWillReceiveProps(nextProps) {
-           if (nextProps !== this.props) {
-               this.setState({
-                 loading: true
-               })
-               this.performSearch(nextProps.query);
-             }
-           }
-
-
 
      componentDidMount() {
      this.performSearch(this.props.query);
@@ -51,31 +41,40 @@ import apiKey from './Config';
        });
      }
 
-   windowRefresh = (query) => {
+     //refreshes the url after search input
+      windowRefresh = (query) => {
         window.location.replace(`/search/${query}`);
-     }
+      }
 
-     render(props) {
-       let searchForm = <SearchForm onSearch={this.windowRefresh} />;
-       return(
-             <div>
-               <div className="container">
-                 {searchForm}
-                 <Nav />
-               <div className="photo-container">
-                 <h4> Images of {this.props.query}</h4>
-                   {
-                     (this.state.loading)
-                     ? <p>Loading...</p>
-                     : <PhotoList data={this.state.photos} title={this.state.title} loading={this.state.loading}/>
-                   }
+       render(props) {
+         var partial;
+         var display = {display: 'none'}; //used to hide title when no images are found on search
+         if(this.state.photos.length === 0){
+           partial = <div className="photo-container"><h4 style={display}>Images of {this.props.query}</h4></div>
+         }
+         else{
+           partial = <div className="photo-container"><h4> Images of {this.props.query}</h4></div>
+         }
+
+         return(
+               <div>
+                 <div className="container">
+                   <SearchForm onSearch={this.windowRefresh} />
+                   <Nav />
+                 <div className="photo-container">
+                    {partial}
+                     {
+                       (this.state.loading)
+                       ? <p>Loading...</p>
+                       : <PhotoList data={this.state.photos} title={this.state.title} loading={this.state.loading}/>
+                     }
+                   </div>
                  </div>
                </div>
-             </div>
 
-            );
+              );
+            }
           }
-        }
 
 
 
