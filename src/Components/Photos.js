@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Photos = (props) => {
   return(
       <li className="photo-wrap">
@@ -7,4 +8,6 @@ const Photos = (props) => {
        </li>
      );
 }
+
+
 export default Photos;

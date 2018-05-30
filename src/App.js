@@ -7,7 +7,6 @@ import {
 
 
 //Components
-
 import Container from './Container';
 import Error from './Components/Error';
 import QueryResult from './Components/QueryResult';
