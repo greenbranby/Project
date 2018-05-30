@@ -18,19 +18,16 @@ const PhotoList = (props) => {
                    key={photo.id}
                    title={photo.title}/>
                  );
-          } else {
-           photos = <NoPhotos />
-          }
-
-       return(
-         <ul className="photo-list">
-          {
-            (props.loading)
-            ? <p>Loading...</p>
-            : photos
-          }
-          </ul>
-         );
+         } else {
+          photos = <NoPhotos />
         }
+
+          return(
+            <ul className="photo-list">
+              {photos}
+            </ul>
+          );
+    }
+
 
 export default PhotoList;

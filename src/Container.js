@@ -9,7 +9,8 @@ import Nav from './Components/Nav';
 import PhotoList from './Components/PhotoList';
 import apiKey from './Config';
 
- class Fetch extends Component {
+
+ class Container extends Component {
 
      constructor(props) {
        super(props);
@@ -20,8 +21,19 @@ import apiKey from './Config';
        }
      }
 
+     componentWillReceiveProps(nextProps) {
+           if (nextProps !== this.props) {
+               this.setState({
+                 loading: true
+               })
+               this.performSearch(nextProps.query);
+             }
+           }
+
+
+
      componentDidMount() {
-     this.performSearch();
+     this.performSearch(this.props.query);
      }
 
 
@@ -39,23 +51,32 @@ import apiKey from './Config';
        });
      }
 
-     render() {
-       console.log(this.state.photos);
+   windowRefresh = (query) => {
+        window.location.replace(`/search/${query}`);
+     }
 
-       return (
-        <div className="container">
-          <SearchForm onSearch={this.performSearch} />
-          <Nav />
-            <div className ="photo-container">
+     render(props) {
+       let searchForm = <SearchForm onSearch={this.windowRefresh} />;
+       return(
+             <div>
+               <div className="container">
+                 {searchForm}
+                 <Nav />
+               <div className="photo-container">
+                 <h4> Images of {this.props.query}</h4>
+                   {
+                     (this.state.loading)
+                     ? <p>Loading...</p>
+                     : <PhotoList data={this.state.photos} title={this.state.title} loading={this.state.loading}/>
+                   }
+                 </div>
+               </div>
+             </div>
 
-             <h2>Images of {this.props.query}</h2>
-              <PhotoList data={this.state.photos} title={this.state.title} loading={this.state.loading}/>
-            </div>
-        </div>
-    );
-  }
-}
+            );
+          }
+        }
 
 
 
-export default Fetch;
+export default Container;
