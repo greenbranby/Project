@@ -11,7 +11,7 @@ import apiKey from './Config';
 
 
  class Container extends Component {
-
+   //Defines an initial state in the Container class
      constructor(props) {
        super(props);
        this.state = {
@@ -21,13 +21,13 @@ import apiKey from './Config';
        }
      }
 
-
+    // Sets up all of the data fetching right when the component is mounted to the DOM.
      componentDidMount() {
      this.performSearch(this.props.query);
      }
 
 
-     //Fetch data with Axios from Flickr API
+     //Fetch data with Axios from Flickr API and returns an error message along with the rejection reason as a console log.
      performSearch = (query=this.props.query) => {
      axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=20&format=json&nojsoncallback=1`)
      .then(response => {
@@ -41,9 +41,9 @@ import apiKey from './Config';
        });
      }
 
-     //refreshes the url after search input
+     //refreshes the url after search input but also allows it to remember url history
       windowRefresh = (query) => {
-        window.location.replace(`/search/${query}`);
+        window.location.assign(`/search/${query}`);
       }
 
        render(props) {

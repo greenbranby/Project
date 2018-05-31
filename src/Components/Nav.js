@@ -2,8 +2,8 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 
 
-
-const Nav = () =>
+//The navigation buttons for our App
+const Nav = (props) =>
         <nav className = "main-nav">
               <ul>
                    <li><NavLink to='/ranunculus'>Ranunculus</NavLink></li>
@@ -12,5 +12,8 @@ const Nav = () =>
               </ul>
           </nav>
 
+          Nav.propTypes = {
+
+          };
 
 export default Nav;

@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 
 
-
  class SearchForm extends Component {
 
 
   constructor(props) {
       super(props);
-      this.handleSubmit = this.handleSubmit.bind(this);
+      this.state = {
+      searchText: ''
+    };
   }
-
-  onSearch = (e) => {
+//this function updates with the text users type into the input field.
+ onSearch = (e) => {
       this.setState({ searchText: e.target.value });
     }
-
+ // handlesubmit function is called when the form is submitted
   handleSubmit = e => {
          e.preventDefault();
-         this.props.onSearch(this.query.value);
+         this.props.onSearch(this.state.searchText);
          e.currentTarget.reset();
        }
 
@@ -35,5 +36,6 @@ import React, { Component } from 'react';
     );
   }
 }
+
 
 export default SearchForm

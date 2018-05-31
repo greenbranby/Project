@@ -1,5 +1,7 @@
 import React from 'react';
 
+// This component contains the template
+// that displays each image.
 
 const Photos = (props) => {
   return(
